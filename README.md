@@ -120,12 +120,14 @@ Add the following secrets to your repository:
 
 ## Docker Image Tags
 ```
-Git Event             |       Docker Tag
---------------------------------------------------------------------------
-| Push `develop` |                                                       |`clock-app:develop`                                                      |
-| Push `main`    |                                  `clock-app:latest`                                                       |
-| Tag `v1.0.0`   | `clock-app:v1.0.0`, `clock-app:v1.0`, `clock-app:v1`, `clock-app:latest` |
-```
+Git Event              |       Docker tag
+-----------------------------------------------------------------------------
+Push develop           | `clock-app:develop`                                     
+Push main              | `clock-app:latest`
+Tag v1.0.0             | `clock-app:v1.0.0`, `clock-app:v1.0`, `clock-app:v1`, `clock-app:latest`
+
+
+
 
 ## Manual Deployment (Optional)
 
