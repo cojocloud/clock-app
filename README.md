@@ -9,12 +9,10 @@ This project is Dockerized and can be deployed to **Ubuntu EC2 with Nginx** usin
     B --> [Build Docker Image]
     C --> {Branch / Tag?}
     D -->|develop| [Push Docker Image:develop]
-    D -->|main| F[Push Docker Image:latest]
-    D -->|vX.Y.Z tag| [Push Docker Image:vX.Y.Z, vX.Y, vX, latest]
-    E --> [Staging EC2 via SSH]
-    F --> [Production EC2 via SSH]
-    G --> I
-    H --> [Run container, Nginx already configured]
+    E -->|main| F[Push Docker Image:latest]
+    F -->|vX.Y.Z tag| [Push Docker Image:vX.Y.Z, vX.Y, vX, latest]
+    G --> [Staging EC2 via SSH]
+    H --> [Production EC2 via SSH]
     I --> [Run container, Nginx already configured]
     J --> [App accessible at staging URL]
     K --> [App accessible at production URL]
