@@ -4,15 +4,15 @@
 
 set -e
 
-echo "🚀 Setting up EC2 instance for Clock App deployment..."
+echo "Setting up EC2 instance for Clock App deployment..."
 
 # Update system
-echo "📦 Updating system packages..."
+echo "Updating system packages..."
 sudo apt-get update
 sudo apt-get upgrade -y
 
 # Install Docker
-echo "🐳 Installing Docker..."
+echo "Installing Docker..."
 sudo apt-get install -y \
     ca-certificates \
     curl \
@@ -41,7 +41,7 @@ sudo systemctl start docker
 sudo systemctl enable docker
 
 # Install Nginx
-echo "🌐 Installing Nginx..."
+echo "Installing Nginx..."
 sudo apt-get install -y nginx
 
 # Start and enable Nginx
@@ -49,7 +49,7 @@ sudo systemctl start nginx
 sudo systemctl enable nginx
 
 # Create Nginx configuration for reverse proxy
-echo "⚙️  Configuring Nginx reverse proxy..."
+echo "Configuring Nginx reverse proxy..."
 sudo tee /etc/nginx/sites-available/clock-app > /dev/null <<'EOF'
 server {
     listen 80;
@@ -93,23 +93,23 @@ sudo nginx -t
 sudo systemctl reload nginx
 
 # Install monitoring tools (optional)
-echo "📊 Installing monitoring tools..."
+echo "Installing monitoring tools..."
 sudo apt-get install -y htop nethogs iotop
 
 # Configure firewall
-echo "🔥 Configuring firewall..."
+echo "Configuring firewall..."
 sudo ufw allow 22/tcp   # SSH
 sudo ufw allow 80/tcp   # HTTP
 sudo ufw allow 443/tcp  # HTTPS (for future)
 sudo ufw --force enable
 
 # Create deployment directory
-echo "📁 Creating deployment directory..."
+echo "Creating deployment directory..."
 mkdir -p ~/deployments
 cd ~/deployments
 
 # Set up log rotation for Docker
-echo "📝 Configuring Docker log rotation..."
+echo "Configuring Docker log rotation..."
 sudo tee /etc/docker/daemon.json > /dev/null <<'EOF'
 {
   "log-driver": "json-file",
@@ -124,7 +124,7 @@ sudo systemctl restart docker
 
 # Display system info
 echo ""
-echo "✅ EC2 setup complete!"
+echo "EC2 setup complete!"
 echo ""
 echo "System Information:"
 echo "=================="
@@ -137,4 +137,4 @@ echo "1. Add this EC2 public IP to GitHub secrets as EC2_HOST"
 echo "2. Add your SSH private key to GitHub secrets as EC2_SSH_KEY"
 echo "3. Run the GitHub Actions workflow to deploy"
 echo ""
-echo "⚠️  Note: You may need to log out and back in for Docker group permissions to take effect"
+echo " Note: You may need to log out and back in for Docker group permissions to take effect"

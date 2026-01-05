@@ -119,9 +119,9 @@ jobs:
             # Health check
             sleep 5
             if [ "$(docker ps -q -f name=clock-app-staging)" ]; then
-              echo "✅ Container is running"
+              echo "Container is running"
             else
-              echo "❌ Container failed to start"
+              echo "Container failed to start"
               docker logs clock-app-staging
               exit 1
             fi
@@ -188,9 +188,9 @@ jobs:
             # Health check
             sleep 5
             if [ "$(docker ps -q -f name=clock-app)" ]; then
-              echo "✅ Container is running"
+              echo "Container is running"
             else
-              echo "❌ Container failed to start"
+              echo "Container failed to start"
               docker logs clock-app
               exit 1
             fi
