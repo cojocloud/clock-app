@@ -4,22 +4,20 @@ A simple, visually appealing **web-based clock application** with analog and dig
 This project is Dockerized and can be deployed to **Ubuntu EC2 with Nginx** using a fully automated GitHub Actions CI/CD pipeline.
 
 # CI/CD Deployment Flow
-
 ```
-flowchart LR
-    A[Commit / Tag] --> B[GitHub Actions Workflow]
-    B --> C[Build Docker Image]
-    C --> D{Branch / Tag?}
-    D -->|develop| E[Push Docker Image:develop]
+    A[Commit / Tag] --> [GitHub Actions Workflow]
+    B --> [Build Docker Image]
+    C --> {Branch / Tag?}
+    D -->|develop| [Push Docker Image:develop]
     D -->|main| F[Push Docker Image:latest]
-    D -->|vX.Y.Z tag| G[Push Docker Image:vX.Y.Z, vX.Y, vX, latest]
-    E --> H[Staging EC2 via SSH]
-    F --> I[Production EC2 via SSH]
+    D -->|vX.Y.Z tag| [Push Docker Image:vX.Y.Z, vX.Y, vX, latest]
+    E --> [Staging EC2 via SSH]
+    F --> [Production EC2 via SSH]
     G --> I
-    H --> J[Run container, Nginx already configured]
-    I --> K[Run container, Nginx already configured]
-    J --> L[App accessible at staging URL]
-    K --> M[App accessible at production URL]
+    H --> [Run container, Nginx already configured]
+    I --> [Run container, Nginx already configured]
+    J --> [App accessible at staging URL]
+    K --> [App accessible at production URL]
 ```
 
 ## How it works:
@@ -35,6 +33,7 @@ Nginx is already configured by setup-ec2.sh
 Staging and production environments are separate
 
 ## File Structure
+```
 clock-app/
 ├── .github/
 │   └── workflows/
@@ -49,17 +48,7 @@ clock-app/
 ├── Dockerfile                # Docker image definition
 ├── .dockerignore             # Files to ignore for Docker build
 └── README.md                 # Project documentation
-
-## How this workflows behaves
 ```
-| Action             | Build | Staging | Prod |
-| ------------------ | ----- | ------- | ---- |
-| Push to `develop`  | ✅     | ✅       | ❌    |
-| Push to `main`     | ✅     | ❌       | ✅    |
-| Tag `v1.0.0`       | ✅     | ❌       | ✅    |
-| README-only change | ❌     | ❌       | ❌    |
-```
-
 
 # Features
 
@@ -121,12 +110,15 @@ Add the following secrets to your repository:
 ## Docker Image Tags
 ```
 Git Event              |       Docker tag
------------------------------------------------------------------------------
-Push develop           | `clock-app:develop`                                     
-Push main              | `clock-app:latest`
-Tag v1.0.0             | `clock-app:v1.0.0`, `clock-app:v1.0`, `clock-app:v1`, `clock-app:latest`
+---------------------------------------------------------------------
+Push develop           | clock-app:develop    
 
+Push main              | clock-app:latest
 
+Tag v1.0.0             | clock-app:v1.0.0, clock-app:v1.0, clock-app:v1, 
+clock-app:latest
+--------------------------------------------------------------------------
+```
 
 
 ## Manual Deployment (Optional)
